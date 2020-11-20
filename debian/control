@@ -1,0 +1,38 @@
+Source: python-memcache
+Section: python
+Priority: optional
+Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+Uploaders:
+ Carl Chenet <chaica@ohmytux.com>,
+ Thomas Goirand <zigo@debian.org>,
+Build-Depends:
+ debhelper-compat (= 11),
+ dh-python,
+ openstack-pkg-tools (>= 99~),
+ python3-all,
+ python3-setuptools,
+Build-Depends-Indep:
+ memcached,
+ python3-mock,
+ python3-nose,
+ python3-six,
+Standards-Version: 4.5.0
+Vcs-Git: https://salsa.debian.org/openstack-team/python/python-memcache.git
+Vcs-Browser: https://salsa.debian.org/openstack-team/python/python-memcache
+Homepage: https://github.com/linsomniac/python-memcached
+Rules-Requires-Root: no
+
+Package: python3-memcache
+Architecture: all
+Depends:
+ python3-six,
+ ${misc:Depends},
+ ${python3:Depends},
+Suggests:
+ memcached,
+Description: pure Python memcached client - Python 3.x
+ This software is a 100% Python interface to the memcached memory cache daemon.
+ It is the client side software which allows storing values in one or more,
+ possibly remote, memcached servers.
+ .
+ This package contains the Python 3.x module.

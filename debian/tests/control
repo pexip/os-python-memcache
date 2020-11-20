@@ -1,0 +1,2 @@
+Restrictions: superficial
+Test-Command: python3 -c "import memcache; print(memcache.__version__)"
