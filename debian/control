@@ -1,8 +1,9 @@
 Source: python-memcache
 Section: python
 Priority: optional
-Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
-Uploaders:
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+XSBC-Pexip-Original-Uploaders:
  Carl Chenet <chaica@ohmytux.com>,
  Thomas Goirand <zigo@debian.org>,
 Build-Depends:
@@ -21,6 +22,7 @@ Vcs-Git: https://salsa.debian.org/openstack-team/python/python-memcache.git
 Vcs-Browser: https://salsa.debian.org/openstack-team/python/python-memcache
 Homepage: https://github.com/linsomniac/python-memcached
 Rules-Requires-Root: no
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ bookworm
 
 Package: python3-memcache
 Architecture: all
