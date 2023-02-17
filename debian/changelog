@@ -1,3 +1,9 @@
+python-memcache (1.59-5pexip2) pexip; urgency=medium
+
+  * No-change version bump
+
+ -- Huw Jones <huw@pexip.com>  Fri, 17 Feb 2023 15:21:17 +0000
+
 python-memcache (1.59-5pexip1) pexip; urgency=medium
 
   * Prepare Pexip packaging
