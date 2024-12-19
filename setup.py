@@ -3,18 +3,21 @@
 from setuptools.depends import get_module_constant
 from setuptools import setup  # noqa
 
+dl_url = "https://github.com/linsomniac/python-memcached/releases/download/{0}/python-memcached-{0}.tar.gz"
 
+version = get_module_constant('memcache', '__version__')
 setup(
     name="python-memcached",
-    version=get_module_constant('memcache', '__version__'),
+    version=version,
     description="Pure python memcached client",
     long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     author="Evan Martin",
     author_email="martine@danga.com",
     maintainer="Sean Reifschneider",
-    maintainer_email="jafo@tummy.com",
-    url="http://www.tummy.com/Community/software/python-memcached/",
-    download_url="ftp://ftp.tummy.com/pub/python-memcached/",
+    maintainer_email="jafo00@gmail.com",
+    url="https://github.com/linsomniac/python-memcached",
+    download_url="https://github.com/linsomniac/python-memcached/releases/download/{0}/python-memcached-{0}.tar.gz".format(version), # noqa
     py_modules=["memcache"],
     install_requires=open('requirements.txt').read().split(),
     classifiers=[
@@ -26,11 +29,13 @@ setup(
         "Topic :: Internet",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
 )

@@ -1,2 +1,8 @@
 Restrictions: superficial
 Test-Command: python3 -c "import memcache; print(memcache.__version__)"
+
+Tests: unittests
+Depends:
+ @,
+ @builddeps@,
+Restrictions: allow-stderr needs-root

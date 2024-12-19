@@ -1,3 +1,46 @@
+python-memcache (1.62-3) unstable; urgency=medium
+
+  * Switch to pybuild (Closes: #1090531).
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 19 Dec 2024 10:00:39 +0100
+
+python-memcache (1.62-2) unstable; urgency=medium
+
+  * Removed python3-mock from build-depends.
+
+ -- Thomas Goirand <zigo@debian.org>  Tue, 24 Sep 2024 10:07:00 +0200
+
+python-memcache (1.62-1) unstable; urgency=medium
+
+  * d/watch: switch to using mode=git.
+  * New upstream release:
+    - Removes python3-six depends (Closes: #1070355).
+  * Drop python3.8.diff applied upstream.
+  * Drop python312-remove-a-spurious-backslash.patch applied upstream.
+  * Fix using-port-11212-instead-of-standard-11211.patch.
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 06 May 2024 08:04:59 +0200
+
+python-memcache (1.59-8) unstable; urgency=medium
+
+  * Fix invalid escape sequence '\ ' with python 3.12 by applying upstream
+    patch. Thanks to Vladimir Petko for the debdiff (Closes: #1063487).
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 09 Feb 2024 08:40:20 +0100
+
+python-memcache (1.59-7) unstable; urgency=medium
+
+  * Cleans better (Closes: #1046789).
+
+ -- Thomas Goirand <zigo@debian.org>  Fri, 18 Aug 2023 10:33:38 +0200
+
+python-memcache (1.59-6) unstable; urgency=medium
+
+  * Use pytest instead of nose (Closes: #1018532).
+  * Add autopkgtest.
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 14 Aug 2023 09:30:12 +0200
+
 python-memcache (1.59-5) unstable; urgency=medium
 
   * Add Restrictions: superficial to d/tests/control (Closes: #974468).

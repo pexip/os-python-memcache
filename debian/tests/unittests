@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+set -x
+
+PYTHON3S=$(py3versions -vr 2>/dev/null)
+
+chmod +x debian/setup-test-env-memcached.sh
+for i in ${PYTHON3S} ; do \
+	PYMAJOR=`echo $i | cut -d'.' -f1` ; \
+	echo "===> Testing with python$i (python$PYMAJOR)" ; \
+	debian/setup-test-env-memcached.sh python$i -m pytest -v tests ; \
+done

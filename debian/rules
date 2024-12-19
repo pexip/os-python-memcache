@@ -4,10 +4,12 @@ UPSTREAM_GIT := https://github.com/linsomniac/python-memcached.git
 include /usr/share/openstack-pkg-tools/pkgos.make
 
 %:
-	dh $@ --buildsystem=python_distutils --with python3
+	dh $@ --buildsystem=pybuild --with python3
 
 override_dh_auto_clean:
-	rm -rf Makefile build
+	rm -rf build .stestr *.egg-info .pytest_cache
+	find . -iname '*.pyc' -delete
+	for i in $$(find . -type d -iname __pycache__) ; do rm -rf $$i ; done
 
 override_dh_auto_build:
 	echo "Do nothing..."
@@ -21,6 +23,6 @@ ifeq (,$(findstring nocheck, $(DEB_BUILD_OPTIONS)))
 	set -e ; set -x ; for i in $(PYTHON3S) ; do \
 		PYMAJOR=`echo $$i | cut -d'.' -f1` ; \
 		echo "===> Testing with python$$i (python$$PYMAJOR)" ; \
-		debian/setup-test-env-memcached.sh python$$i -m nose -v ; \
+		debian/setup-test-env-memcached.sh python$$i -m pytest -v tests ; \
 	done
 endif
