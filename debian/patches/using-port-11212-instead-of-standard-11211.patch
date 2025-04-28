@@ -6,14 +6,25 @@ Author: Thomas Goirand <zigo@debian.org>
 Forwarded: not-needed
 Last-Update: 2018-09-06
 
---- python-memcache-1.54+20150423+git+48e882719c.orig/tests/test_memcache.py
-+++ python-memcache-1.54+20150423+git+48e882719c/tests/test_memcache.py
-@@ -27,7 +27,7 @@
+Index: python-memcache/tests/test_memcache.py
+===================================================================
+--- python-memcache.orig/tests/test_memcache.py
++++ python-memcache/tests/test_memcache.py
+@@ -30,7 +30,7 @@ class FooStruct(object):
  class TestMemcache(unittest.TestCase):
      def setUp(self):
          # TODO(): unix socket server stuff
 -        servers = ["127.0.0.1:11211"]
 +        servers = ["127.0.0.1:11212"]
          self.mc = Client(servers, debug=1)
+ 
+     def tearDown(self):
+@@ -257,7 +257,7 @@ class TestMemcache(unittest.TestCase):
+ class TestMemcacheEncoder(unittest.TestCase):
+     def setUp(self):
+         # TODO(): unix socket server stuff
+-        servers = ["127.0.0.1:11211"]
++        servers = ["127.0.0.1:11212"]
+         self.mc = Client(servers, debug=1, key_encoder=self.encoder)
  
      def tearDown(self):

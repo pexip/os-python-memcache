@@ -4,7 +4,10 @@ from __future__ import print_function
 import unittest
 import zlib
 
-import mock
+try:
+    import unittest.mock as mock
+except ImportError:
+    import mock
 
 from memcache import Client, _Host, SERVER_MAX_KEY_LENGTH, SERVER_MAX_VALUE_LENGTH  # noqa: H301
 from .utils import captured_stderr
@@ -45,11 +48,30 @@ class TestMemcache(unittest.TestCase):
         self.check_setget("an_integer", 42)
         self.check_setget("an_integer_2", 42, noreply=True)
 
+    def test_quit_all(self):
+        self.mc.quit_all()
+
     def test_delete(self):
         self.check_setget("long", int(1 << 30))
         result = self.mc.delete("long")
         self.assertEqual(result, True)
         self.assertEqual(self.mc.get("long"), None)
+        result = self.mc.delete("<missing>")
+        self.assertEqual(result, False)
+
+    def test_default(self):
+        key = "default"
+        default = object()
+        result = self.mc.get(key, default=default)
+        self.assertEqual(result, default)
+
+        self.mc.set("default", None)
+        result = self.mc.get(key, default=default)
+        self.assertIsNone(result)
+
+        self.mc.set("default", 123)
+        result = self.mc.get(key, default=default)
+        self.assertEqual(result, 123)
 
     @mock.patch.object(_Host, 'send_cmd')
     @mock.patch.object(_Host, 'readline')
@@ -228,8 +250,35 @@ class TestMemcache(unittest.TestCase):
             self.mc.touch('key')
         self.assertEqual(
             output.getvalue(),
-            "MemCached: touch expected %s, got: 'SET'\n" % b'TOUCHED'
+            "MemCached: touch expected %s, got: 'SET'\n" % 'TOUCHED'
         )
+
+
+class TestMemcacheEncoder(unittest.TestCase):
+    def setUp(self):
+        # TODO(): unix socket server stuff
+        servers = ["127.0.0.1:11211"]
+        self.mc = Client(servers, debug=1, key_encoder=self.encoder)
+
+    def tearDown(self):
+        self.mc.flush_all()
+        self.mc.disconnect_all()
+
+    def encoder(self, key):
+        return key.lower()
+
+    def check_setget(self, key, val, noreply=False):
+        self.mc.set(key, val, noreply=noreply)
+        newval = self.mc.get(key)
+        self.assertEqual(newval, val)
+
+    def test_setget(self):
+        self.check_setget("a_string", "some random string")
+        self.check_setget("A_String2", "some random string")
+        self.check_setget("an_integer", 42)
+        self.assertEqual("some random string", self.mc.get("A_String"))
+        self.assertEqual("some random string", self.mc.get("a_sTRing2"))
+        self.assertEqual(42, self.mc.get("An_Integer"))
 
 
 if __name__ == '__main__':
